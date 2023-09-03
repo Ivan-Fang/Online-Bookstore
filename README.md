@@ -4,19 +4,16 @@
   * Only basic Java Web elements (ex. JDBC, Servlet, Listener, Filter...) are included.
 
 # Functionalities
-This project supports the following functionalities:
+This project supports the following functionalities.
 * login, register
-* show the books info based on database
-* add books to the cart, adjust the number of the books
-* checkout, check the order list
-
-# Screenshots
-<img src="https://github.com/Ivan-Fang/BookStore/assets/40261483/35408165-b4d7-4403-86d7-2e2f88d1fa25" height="200px">
-<img src="https://github.com/Ivan-Fang/BookStore/assets/40261483/a9f9a365-bd03-4e77-b82f-4a68d459d810" height="200px"><br/>
-<img src="https://github.com/Ivan-Fang/BookStore/assets/40261483/5cca87fe-7949-41a4-b774-13856b72337d" width="800px"><br/>
-<img src="https://github.com/Ivan-Fang/BookStore/assets/40261483/c662e730-ddd9-4524-932c-ffa5e196b695" width="800px"><br/>
-<img src="https://github.com/Ivan-Fang/BookStore/assets/40261483/cc37cb9a-3a33-42e8-96eb-9ef7248f7625" width="800px"><br/>
-
+  <br/><img src="https://github.com/Ivan-Fang/BookStore/assets/40261483/7eab87bb-fc5c-42bc-b75b-7763fc11736a" height="200px">
+  <img src="https://github.com/Ivan-Fang/BookStore/assets/40261483/fc85869b-8b3d-4476-a0c8-da230c7325de" height="200px">
+* show the books info based on database, add books to the cart
+  <br/><img src="https://github.com/Ivan-Fang/BookStore/assets/40261483/73892648-9278-4b9a-a4f3-7d464705103e" width="600px"><br/>
+* adjust the number of the books, checkout
+  <br/><img src="https://github.com/Ivan-Fang/BookStore/assets/40261483/dcc8c809-2a0a-4683-87b1-e76059ad3f83" width="600px"><br/>
+* check the order list
+  <br/><img src="https://github.com/Ivan-Fang/BookStore/assets/40261483/03eaf970-ffcc-4196-86ee-d93eeb1173d9" width="600px"><br/>
 
 # Self-defined Java framework
 * `DispatcherServlet`: Mimics the `DispatcherServlet` in Spring which implements the Controller functionality in MVC.
