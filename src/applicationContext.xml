@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE beans [
+        <!ELEMENT beans (bean*)>
+        <!ELEMENT bean (property*)>
+        <!ELEMENT property (#PCDATA)>
+
+        <!ATTLIST bean id ID #REQUIRED>
+        <!ATTLIST bean class CDATA #IMPLIED>
+        <!ATTLIST property name CDATA #IMPLIED>
+        <!ATTLIST property ref IDREF #IMPLIED>
+        ]>
+
+<beans>
+    <!-- DAO -->
+    <bean id="bookDAO" class="dao.BookDAO"/>
+    <bean id="cartItemDAO" class="dao.CartItemDAO"/>
+    <bean id="orderDAO" class="dao.OrderDAO"/>
+    <bean id="orderItemDAO" class="dao.OrderItemDAO"/>
+    <bean id="userDAO" class="dao.UserDAO"/>
+
+    <!-- service -->
+    <bean id="bookService" class="service.BookService">
+        <property name="bookDAO" ref="bookDAO"/>
+    </bean>
+
+    <bean id="cartItemService" class="service.CartItemService">
+        <property name="cartItemDAO" ref="cartItemDAO"/>
+        <property name="bookService" ref="bookService"/>
+    </bean>
+
+    <bean id="orderService" class="service.OrderService">
+        <property name="orderDAO" ref="orderDAO"/>
+        <property name="orderItemDAO" ref="orderItemDAO"/>
+        <property name="cartItemDAO" ref="cartItemDAO"/>
+    </bean>
+
+    <bean id="userService" class="service.UserService">
+        <property name="userDAO" ref="userDAO"/>
+    </bean>
+
+    <!-- controller -->
+    <bean id="book" class="controller.BookController">
+        <property name="bookService" ref="bookService"/>
+    </bean>
+
+    <bean id="cart" class="controller.CartController">
+        <property name="cartItemService" ref="cartItemService"/>
+    </bean>
+
+    <bean id="order" class="controller.OrderController">
+        <property name="orderService" ref="orderService"/>
+    </bean>
+
+    <bean id="page" class="controller.PageController"/>
+
+    <bean id="user" class="controller.UserController">
+        <property name="userService" ref="userService"/>
+        <property name="cartItemService" ref="cartItemService"/>
+    </bean>
+
+</beans>
