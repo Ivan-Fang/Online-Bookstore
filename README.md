@@ -1,6 +1,6 @@
 
 # Description
-  * Create a online bookstore with <span style="background-color: #FFFF00">self-defined Java framework</span>.
+  * Create a online bookstore with <b>self-defined Java framework</b>.
   * Only basic Java Web elements (ex. JDBC, Servlet, Listener, Filter...) are included.
   * SSM and Springboot are not used, we use self-defined framework instead.
 
