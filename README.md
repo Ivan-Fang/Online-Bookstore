@@ -34,4 +34,4 @@ This project supports the following functionalities:
 * Druid 1.1.10
 * Vue 2
 * Axios 0.21.1
-* IDE: Intellij IDEA
+* IDE: Intellij IDEA 2023
