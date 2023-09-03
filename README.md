@@ -1,5 +1,5 @@
 # Description
-  * Create a online bookstore with <b>self-defined Java framework</b>.
+  * A online bookstore using <b>self-defined Java framework</b>.
   * SSM and Springboot are not used, we use self-defined framework instead.
   * Only basic Java Web elements (ex. JDBC, Servlet, Listener, Filter...) are included.
 
