@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/static/css/minireset.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/cart.css}"/>
+    <script language="JavaScript" th:src="@{/static/script/axios.min.js}"></script>
+    <script language="JavaScript" th:src="@{/static/script/vue.js}"></script>
+    <script language="JavaScript" th:src="@{/static/script/cart.js}"></script>
+    <base th:href="@{/}">
+</head>
+
+<body>
+<div class="header">
+    <div class="w">
+        <div class="header-left">
+            <a th:href="@{/index.html}">
+                <img th:src="@{/static/img/logo.gif}" alt=""/></a>
+            <h1>我的購物車</h1>
+        </div>
+        <div class="header-right">
+            <h3>歡迎<span th:text="${session.currUser.name}">張總</span>光臨尚硅谷書城</h3>
+            <div class="order"><a th:href="@{order.do(operate='getOrderList')}">我的訂單</a></div>
+            <div class="destory"><a th:href="@{WEB-INF/pages/index.html}">註銷</a></div>
+            <div class="gohome">
+                <a th:href="@{page.do?operate=accessPage&pagePath=index}">返回</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="list" id="cart_div">
+    <div class="w">
+        <table>
+            <thead>
+            <tr>
+                <th>圖片</th>
+                <th>商品名稱</th>
+                <th>數量</th>
+                <th>單價</th>
+                <th>金額</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr v-for="cartItem in cart.cartItemMap">
+                <td>
+                    <img v-bind:src="'static/uploads/'+cartItem.book.cover" alt=""/>           <!-- cover -->
+                </td>
+                <td>{{cartItem.book.name}}</td>                                                 <!-- name -->
+                <td>
+                    <span class="count"
+                          v-if="cartItem.count > 1"
+                          @click="editCartItem(cartItem.id, cartItem.count - 1)">-</span>
+                    <input class="count-num" type="text" v-bind:value="cartItem.count"/>        <!-- count -->
+                    <span class="count" @click="editCartItem(cartItem.id, cartItem.count + 1)">+</span>
+                </td>
+                <td>{{cartItem.book.price}}</td>                                                 <!-- price -->
+                <td>{{cartItem.subTotalPrice}}</td>                                             <!-- sub total -->
+                <td><a href="">刪除</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="footer">
+            <div class="footer-left">
+                <a href="#" class="clear-cart">清空購物車</a>
+                <a th:href="@{page.do?operate=accessPage&pagePath=index}">繼續購物</a>
+            </div>
+            <div class="footer-right">
+                <div>共<span>{{cart.totalCount}}</span>件商品</div>
+                <div class="total-price">總金額<span>{{cart.totalPrice}}</span>元</div>
+                <a class="pay" th:href="@{/order.do(operate='checkout')}">去結帳</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bottom">
+    <div class="w">
+        <div class="top">
+            <ul>
+                <li>
+                    <a href="">
+                        <img th:src="@{/static/img/bottom1.png}" alt=""/>
+                        <span>大咖級講師親自授課</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img th:src="@{/static/img/bottom.png}" alt=""/>
+                        <span>課程為學員成長持續賦能</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img th:src="@{/static/img/bottom2.png}" alt=""/>
+                        <span>學員真是情況大公開</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <dl>
+                <dt>關於尚硅谷</dt>
+                <dd>教育理念</dd>
+                <!-- <dd>名師團隊</dd>
+                <dd>學員心聲</dd> -->
+            </dl>
+            <dl>
+                <dt>資源下載</dt>
+                <dd>視頻下載</dd>
+                <!-- <dd>資料下載</dd>
+                <dd>工具下載</dd> -->
+            </dl>
+            <dl>
+                <dt>加入我們</dt>
+                <dd>招聘崗位</dd>
+                <!-- <dd>崗位介紹</dd>
+                <dd>招賢納師</dd> -->
+            </dl>
+            <dl>
+                <dt>聯繫我們</dt>
+                <dd>http://www.atguigu.com</dd>
+                <dd></dd>
+            </dl>
+        </div>
+    </div>
+    <div class="down">
+        尚硅谷書城.Copyright ©2023
+    </div>
+</div>
+
+</body>
+</html>

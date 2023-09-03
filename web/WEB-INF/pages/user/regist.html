@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>尚硅谷會員註冊</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/static/css/style.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/register.css}"/>
+    <style type="text/css">
+        .login_form {
+            height: 420px;
+            margin-top: 25px;
+        }
+    </style>
+    <script type="text/javascript" th:src="@{/static/script/regist.js}"></script>
+</head>
+
+<body>
+
+<div id="login_header">
+    <a href="../index.html">
+        <img class="logo_img" alt="" th:src="@{/static/img/logo.gif}"/>
+    </a>
+</div>
+
+<div class="login_banner">
+    <div class="register_form">
+        <h1>註冊尚硅谷會員</h1>
+        <form th:action="@{/user.do}" onsubmit="return checkRegisterInfo();">
+            <input type="hidden" name="operate" value="register">
+            <div class="form-item">
+                <div>
+                    <label>用戶名稱:</label>
+                    <input type="text" placeholder="請輸入用戶名" name="name" id="nameNode" value="lina" onblur="checkDuplicateName(this.value)"/>
+                </div>
+                <span class="errMess" id="nameSpan">用戶名應為6~16位元數字和字母組成</span>
+            </div>
+            <div class="form-item">
+                <div>
+                    <label>用戶密碼:</label>
+                    <input type="password" placeholder="請輸入密碼" name="password" id="passwordNode" value="12345678"/>
+                </div>
+                <span class="errMess" id="passwordSpan">密碼的長度至少為8位</span>
+            </div>
+            <div class="form-item">
+                <div>
+                    <label>確認密碼:</label>
+                    <input type="password" placeholder="請輸入確認密碼" name="password2" id="password2Node" value="12345678"/>
+                </div>
+                <span class="errMess" id="password2Span">密碼兩次輸入不一致</span>
+            </div>
+            <div class="form-item">
+                <div>
+                    <label>用戶郵箱:</label>
+                    <input type="text" placeholder="請輸入郵箱" name="email" id="emailNode" value="12"/>
+                </div>
+                <span class="errMess" id="emailSpan">請輸入正確的郵箱格式</span>
+            </div>
+            <div class="form-item">
+                <div>
+                    <label>驗證碼:</label>
+                    <div class="verify">
+                        <input type="text" placeholder="" name="verificationCode"/>
+                        <img th:src="@{/kaptcha.jpg}" alt=""/>
+                    </div>
+                </div>
+                <span class="errMess">請輸入正確的驗證碼</span>
+            </div>
+            <button class="btn">註冊</button>
+        </form>
+    </div>
+</div>
+<div id="bottom">
+      <span>
+        尚硅谷書城 Copyright &copy; 2023
+      </span>
+</div>
+</body>
+</html>

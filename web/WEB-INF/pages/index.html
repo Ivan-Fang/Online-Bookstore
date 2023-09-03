@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>歡迎光臨尚硅谷書城</title>
+    <link rel="stylesheet" th:href="@{/static/css/minireset.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/iconfont.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/index.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/swiper.min.css}"/>
+    <script type="text/javascript" th:src="@{/static/script/index.js}"></script>
+</head>
+<body>
+<div id="app">
+    <div class="topbar">
+        <div class="w">
+            <div class="topbar-left">
+                <i>送至:</i>
+                <i>北京</i>
+                <i class="iconfont icon-ai-arrow-down"></i>
+            </div>
+
+
+            <div class="topbar-right" th:if="${session.currUser == null}">       <!-- before log in -->
+                <a href="user/login.html" class="login">登入</a>
+                <a href="user/regist.html" class="register">註冊</a>
+                <a href="cart/cart.html" class="cart iconfont icon-gouwuche">
+                    購物車
+                    <div class="cart-num"></div>
+                </a>
+                <a href="manager/book_manager.html" class="admin">後台管理</a>
+            </div>
+            <div class="topbar-right" th:unless="${session.currUser == null}">   <!-- after log in -->
+                <span>歡迎你<b th:text="${session.currUser.name}">張總</b></span>
+                <a href="#" class="register">註銷</a>
+                <a th:href="cart.do" class="cart iconfont icon-gouwuche">
+                    購物車
+                    <div class="cart-num" th:text="${session.currUser.cart.totalCategory}">nan</div>
+                </a>
+                <a href="./pages/manager/book_manager.html" class="admin">後台管理</a>
+            </div>
+        </div>
+    </div>
+    <div class="header w">
+        <a href="#" class="header-logo"></a>
+        <div class="header-nav">
+            <ul>
+                <li><a href="#">java</a></li>
+                <li><a href="#">前端</a></li>
+                <li><a href="#">小說</a></li>
+                <li><a href="#">文學</a></li>
+                <li><a href="#">青春文學</a></li>
+                <li><a href="#">藝術</a></li>
+                <li><a href="#">管理</a></li>
+            </ul>
+        </div>
+        <div class="header-search">
+            <input type="text" placeholder="十萬個為什麼"/>
+            <button class="iconfont icon-search"></button>
+        </div>
+    </div>
+    <div class="banner w clearfix">
+        <div class="banner-left">
+            <ul>
+                <li>
+                    <a href="">
+                        <span>文學 鑒賞</span>
+                        <i class="iconfont icon-jiantou"></i
+                        ></a>
+                </li>
+                <li>
+                    <a href="">
+                        <span>社科 研究</span>
+                        <i class="iconfont icon-jiantou"></i
+                        ></a>
+                </li>
+                <li>
+                    <a href="">
+                        <span>少兒 培訓</span>
+                        <i class="iconfont icon-jiantou"></i
+                        ></a>
+                </li>
+                <li>
+                    <a href="">
+                        <span>藝術 賞析</span>
+                        <i class="iconfont icon-jiantou"></i
+                        ></a>
+                </li>
+                <li>
+                    <a href="">
+                        <span>生活 周邊</span>
+                        <i class="iconfont icon-jiantou"></i
+                        ></a>
+                </li>
+                <li>
+                    <a href="">
+                        <span>文教 科技</span>
+                        <i class="iconfont icon-jiantou"></i
+                        ></a>
+                </li>
+                <li>
+                    <a href="">
+                        <span>熱銷 暢讀</span>
+                        <i class="iconfont icon-jiantou"></i
+                        ></a>
+                </li>
+            </ul>
+        </div>
+        <div class="banner-right">
+            <div class="swiper-container">
+                <ul class="swiper-wrapper">
+                    <li class="swiper-slide">
+                        <img src="./static/uploads/banner4.jpg" alt="">
+                        <!-- <div class="banner-img"></div> -->
+                    </li>
+                    <li class="swiper-slide">
+                        <img src="./static/uploads/banner5.jpg" alt="">
+                        <!-- <div class="banner-img"></div> -->
+                    </li>
+                    <li class="swiper-slide">
+                        <img src="./static/uploads/banner6.jpg" alt="">
+                        <!-- <div class="banner-img"></div> -->
+                    </li>
+                </ul>
+                <div class="swiper-button-prev"></div>
+
+                <div class="swiper-button-next"></div>
+
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+    <div class="books-list ">
+        <div class="w">
+            <div class="list">
+                <div class="list-header">
+                    <div class="title">圖書列表</div>
+                    <div class="price-search">
+                        <span>價格查詢：</span>
+                        <input type="text">
+                        <span>–</span>
+                        <input type="text">
+                        <button>查詢</button>
+                    </div>
+                </div>
+
+                <div class="list-content">
+                    <div href="" class="list-item" th:each="book: ${session.bookList}" th:object="${book}">
+                        <img th:src="@{|/static/uploads/*{cover}|}" alt="">
+                        <p th:text="|書名：*{name}|">書名：活著</p>
+                        <p th:text="|作者：*{author}|">作者：余華</p>
+                        <p th:text="|價格：NTD *{price}|">價格：NTD 66.6</p>
+                        <p th:text="|銷量：*{salesVolume}|">銷量：230</p>
+                        <p th:text="|庫存：*{stock}|">庫存：1000</p>
+                        <button th:onclick="|addToCart(*{id})|">加入購物車</button>
+                    </div>
+                </div>
+
+                <div class="list-footer">
+                    <div>首頁</div>
+                    <div>上一頁</div>
+                    <ul>
+                        <li class="active">1</li>
+                        <li>2</li>
+                        <li>3</li>
+                    </ul>
+                    <div>下一頁</div>
+                    <div>末頁</div>
+                    <span>共10頁</span>
+                    <span>30條記錄</span>
+                    <span>到第</span>
+                    <input type="text">
+                    <span>頁</span>
+                    <button>確定</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="cate w">
+        <div class="list">
+            <a href="" class="list-item">
+                <i class="iconfont icon-java"></i>
+                <span>java</span>
+            </a>
+            <a href="" class="list-item"
+            ><i class="iconfont icon-h5"></i>h5</a
+            >
+            <a href="" class="list-item">
+                <i class="iconfont icon-python"></i>python
+            </a>
+            <a href="" class="list-item"
+            ><i class="iconfont icon-tianchongxing-"></i>pm</a
+            >
+            <a href="" class="list-item"
+            ><i class="iconfont icon-php_elephant"></i>php</a
+            >
+            <a href="" class="list-item"
+            ><i class="iconfont icon-go"></i>go</a
+            >
+        </div>
+        <a href="" class="img">
+            <img src="./static/uploads/cate4.jpg" alt=""/>
+        </a>
+        <a href="" class="img">
+            <img src="./static/uploads/cate5.jpg" alt=""/>
+        </a>
+        <a href="" class="img">
+            <img src="./static/uploads/cate6.jpg" alt=""/>
+        </a>
+    </div>
+    <div class="books">
+        <div class="w">
+            <div class="seckill">
+                <div class="seckill-header">
+                    <div class="title">
+                        圖書秒殺
+                    </div>
+                    <!-- <i class="iconfont icon-huanyipi"></i> -->
+                </div>
+                <div class="seckill-content">
+
+                    <a href="" class="tip">
+                        <h5>距離結束還有</h5>
+                        <i class="iconfont icon-shandian"></i>
+                        <div class="downcount">
+                            <span class="time">00</span>
+                            <span class="token">:</span>
+                            <span class="time">00</span>
+                            <span class="token">:</span>
+                            <span class="time">00</span>
+                        </div>
+                    </a>
+
+
+                    <a href="" class="books-sec">
+                        <img src="./static/uploads/congwanqingdaominguo.jpg" alt="">
+                        <p>從晚晴到民國</p>
+                        <div>
+                            <span class="cur-price">NTD 28.9</span>
+                            <span class="pre-price">NTD 36.5</span>
+                        </div>
+                        <button>立即購買</button>
+                    </a>
+                    <a href="" class="books-sec">
+                        <img src="./static/uploads/cyuyanrumenjingdian.jpg" alt="">
+                        <p>C語言入門經典</p>
+                        <div>
+                            <span class="cur-price">NTD 55.9</span>
+                            <span class="pre-price">NTD 68.5</span>
+                        </div>
+                        <button>立即購買</button>
+                    </a>
+                    <a href="" class="books-sec">
+                        <img src="./static/uploads/fusang.jpg" alt="">
+                        <p>扶桑</p>
+                        <div>
+                            <span class="cur-price">NTD 30.9</span>
+                            <span class="pre-price">NTD 47.5</span>
+                        </div>
+                        <button>立即購買</button>
+                    </a>
+                    <a href="" class="books-sec">
+                        <img src="./static/uploads/geihaizideshi.jpg" alt="">
+                        <p>給孩子的詩</p>
+                        <div>
+                            <span class="cur-price">NTD 18.9</span>
+                            <span class="pre-price">NTD 25.5</span>
+                        </div>
+                        <button>立即購買</button>
+                    </a>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="w">
+            <div class="top">
+                <ul>
+                    <li>
+                        <a href="">
+                            <img src="./static/img/bottom1.png" alt="">
+                            <span>大咖級講師親自授課</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="./static/img/bottom.png" alt="">
+                            <span>課程為學員成長持續賦能</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <img src="./static/img/bottom2.png" alt="">
+                            <span>學員真是情況大公開</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="content">
+                <dl>
+                    <dt>關於尚硅谷</dt>
+                    <dd>教育理念</dd>
+                    <!-- <dd>名師團隊</dd>
+                    <dd>學員心聲</dd> -->
+                </dl>
+                <dl>
+                    <dt>資源下載</dt>
+                    <dd>視頻下載</dd>
+                    <!-- <dd>資料下載</dd>
+                    <dd>工具下載</dd> -->
+                </dl>
+                <dl>
+                    <dt>加入我們</dt>
+                    <dd>招聘崗位</dd>
+                    <!-- <dd>崗位介紹</dd>
+                    <dd>招賢納師</dd> -->
+                </dl>
+                <dl>
+                    <dt>聯繫我們</dt>
+                    <dd>http://www.atguigu.com
+                    <dd>
+                </dl>
+            </div>
+        </div>
+        <div class="down">
+            尚硅谷書城 Copyright © 2023
+        </div>
+    </div>
+
+
+</div>
+<script src="./static/script/swiper.min.js"></script>
+<script>
+    var swiper = new Swiper('.swiper-container', {
+        autoplay: true,
+        pagination: {
+            el: '.swiper-pagination',
+            dynamicBullets: true
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        }
+    })
+</script>
+</body>
+</html>

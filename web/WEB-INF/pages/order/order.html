@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>我的訂單</title>
+    <link rel="stylesheet" th:href="@{/static/css/minireset.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/common.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/cart.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/bookManger.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/orderManger.css}"/>
+</head>
+<body>
+<div class="header">
+    <div class="w">
+        <div class="header-left">
+            <a href="../index.html">
+                <img th:src="@{/static/img/logo.gif}" alt=""/></a>
+            <h1>我的訂單</h1>
+        </div>
+        <div class="header-right">
+            <h3>歡迎<span th:text="${session.currUser.name}">張總</span>光臨尚硅谷書城</h3>
+            <div class="order"><a th:href="@{order.do(operate='getOrderList')}">我的訂單</a></div>
+            <div class="destory"><a th:href="@{WEB-INF/pages/index.html}">註銷</a></div>
+            <div class="gohome">
+                <a th:href="@{page.do?operate=accessPage&pagePath=index}">返回</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="list">
+    <div class="w">
+        <table>
+            <thead>
+            <tr>
+                <th>訂單號</th>
+                <th>訂單日期</th>
+                <th>訂單金額</th>
+                <th>訂單數量</th>
+                <th>訂單狀態</th>
+                <th>訂單詳情</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${session.currUser.orderList}" th:object="${order}">
+                <td th:text="*{orderNo}">12354456895</td>
+                <td th:text="${#dates.format(order.orderDate, 'yyyy-MM-dd HH:mm:ss')}">2015.04.23</td>
+                <td th:text="*{orderPrice}">90.00</td>
+                <td th:text="*{orderCount}">88</td>
+                <td><a href="" class="send">等待發貨</a></td>
+                <td><a href="">查看詳情</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="footer">
+            <div class="footer-right">
+                <div>首頁</div>
+                <div>上一頁</div>
+                <ul>
+                    <li class="active">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+                <div>下一頁</div>
+                <div>末頁</div>
+                <span>共10頁</span>
+                <span>30條記錄</span>
+                <span>到第</span>
+                <input type="text"/>
+                <span>頁</span>
+                <button>確定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bottom">
+    <div class="w">
+        <div class="top">
+            <ul>
+                <li>
+                    <a href="">
+                        <img src="../../static/img/bottom1.png" alt=""/>
+                        <span>大咖級講師親自授課</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="../../static/img/bottom.png" alt=""/>
+                        <span>課程為學員成長持續賦能</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <img src="../../static/img/bottom2.png" alt=""/>
+                        <span>學員真是情況大公開</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <dl>
+                <dt>關於尚硅谷</dt>
+                <dd>教育理念</dd>
+                <!-- <dd>名師團隊</dd>
+                <dd>學員心聲</dd> -->
+            </dl>
+            <dl>
+                <dt>資源下載</dt>
+                <dd>視頻下載</dd>
+                <!-- <dd>資料下載</dd>
+                <dd>工具下載</dd> -->
+            </dl>
+            <dl>
+                <dt>加入我們</dt>
+                <dd>招聘崗位</dd>
+                <!-- <dd>崗位介紹</dd>
+                <dd>招賢納師</dd> -->
+            </dl>
+            <dl>
+                <dt>聯繫我們</dt>
+                <dd>http://www.atguigu.com</dd>
+                <dd></dd>
+            </dl>
+        </div>
+    </div>
+    <div class="down">
+        尚硅谷書城.Copyright ©2015
+    </div>
+</div>
+</body>
+</html>
