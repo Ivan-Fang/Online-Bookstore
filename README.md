@@ -57,6 +57,8 @@
 
     * 程式碼詳見：/src/servlet/DispatcherServlet.java
 
+* 使用 `Listener` 讓專案在 ServletContext 初始化時就根據 bean 配置建創建 IoC 容器。
+
 * 使用 `Thymeleaf` 進行頁面渲染。
 
 ## 開發環境
