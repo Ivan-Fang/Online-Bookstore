@@ -57,6 +57,8 @@ This project uses the following techniques to develop each feature:
 
     * See /src/servlet/DispatcherServlet.java for more details.
 
+* We use `Listener` to let the project create an IoC container based on the bean configuration when the ServletContext is initialized.
+
 * We use `Thymeleaf` for page rendering.
 
 ## Development environment
